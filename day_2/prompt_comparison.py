@@ -54,8 +54,8 @@ def compare_models(test_results, criteria):
         scores = score_response(result["response"], criteria)
         comparison[model_name] = {
             "scores": scores,
-            "tokens": result["tokens"]
-            "latency_ms": result["api_latency_ms"]
+            "tokens": result["tokens_used"]
+            "latency_ms": result["latency_ms"]
         }
 
     ranked = sorted(comparison.items(), key=lambda x: x[1]["scores"]["composite_score"], reverse=True)
