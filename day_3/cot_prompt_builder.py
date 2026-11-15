@@ -1,3 +1,5 @@
+from tot_solver import extract_answer
+
 def build_cot_prompt(question, examples, num_examples=3):
     system = (
         "You are a math problem solver. \n"
@@ -13,3 +15,9 @@ def build_cot_prompt(question, examples, num_examples=3):
 
     user = f"{example_text}Q: {ex['question']}\nA:"
     return system, user
+
+def few_shot_cot_solve(question example, model, num_examples=3):
+    system, user = build_cot_prompt(question, examples, num_examples)
+    prompt = {"system": system, "user": user, "temperature"=0.0}
+    text = llm_call(prompt, model)
+    return extract_answer(text), text
